@@ -1,15 +1,22 @@
-const expenseLog = [{
-  category: 'groceries',
-  priceCents: 4399,
-  date: 'June 14th 2024'
-}, {
-  category: 'golf',
-  priceCents: 5634,
-  date: 'June 15th 2024'
-}]
+let expenseLog = JSON.parse(localStorage.getItem('expenseLog'));
 
 
+if (!expenseLog) {
+  expenseLog = [{
+    category: 'groceries',
+    priceCents: 4399,
+    date: 'June 14th 2024'
+  }, {
+    category: 'golf',
+    priceCents: 5634,
+    date: 'June 15th 2024'
+  }]
+  
+} 
 
+function saveExpenses() {
+  localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
+}
 function renderExpense() {
   let expenseHTML = '';
 
@@ -46,7 +53,9 @@ function addExpense(event) {
     date: date
   })
 
+  
   renderExpense();
+  saveExpenses();
   document.getElementById('expense-form').reset();
 }
 
