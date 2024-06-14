@@ -16,14 +16,23 @@
     </div>
   </div>
   <div class="flex-columns">
-    <form class="user-input" id="expense-form">
-      <label for="Description">Category</label>
-      <input class="Description js-description" type="text">
-      <label  for="Amount">Amount</label>
-      <input class="amount js-amount" type="text">
-      <label for="Date">Date</label>
-      <input class="Date js-date" type="text">
-    </form>
+    <div class="user-input-header">
+      <label class="category-label" for="Category">Category:</label>
+      <select class="category-option js-category">
+        <option value="">Groceries</option>
+        <option value="">Bills</option>
+        <option value="">Entertainment</option>
+        <option value="">Travel</option>
+        <option value="">Others</option>
+      </select>
+        <label  for="Amount">Amount:</label>
+        <input class="amount js-amount" type="text">
+        <label for="Date">Date:</label>
+        <input class="date-picker js-date" type="date" placeholder="mm / dd / yyyy">
+      </form>
+
+    </div>
+    
     <div class="expense-submit">
       <button class="add-btn js-add-btn" type="submit">Add Expense</button>
     </div>
