@@ -1,22 +1,41 @@
+let nextId = 1;
+
+function generateUniqueId() {
+  const timestamp = Date.now();
+  return `id-${timestamp}-${nextId++}`;
+}
+
+
 let expenseLog = JSON.parse(localStorage.getItem('expenseLog'));
 
 
 if (!expenseLog) {
   expenseLog = [{
-    category: 'groceries',
+    id: generateUniqueId(),
+    category: 'Groceries',
     priceCents: 4399,
     date: 'June 14th 2024'
   }, {
+    id: generateUniqueId(),
     category: 'golf',
     priceCents: 5634,
     date: 'June 15th 2024'
   }]
-  
-} 
+} else {
+  expenseLog = expenseLog.map(expense => {
+    if (!expense.id) {
+      expense.id = generateUniqueId();
+    }
+    return expense;
+  });
+  saveExpenses();
+}
+
 
 function saveExpenses() {
   localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
 }
+
 function renderExpense() {
   let expenseHTML = '';
 
@@ -26,12 +45,28 @@ function renderExpense() {
       <div>${purchase.category}</div>
       <div>$${(purchase.priceCents / 100).toFixed(2)}</div>
       <div>${purchase.date}</div>
-      <div><a href="">Delete</a></div>
-      <div><a href="">Update</a></div>
+      <div><button class="js-delete-button" data-expense-id="${purchase.id}">Delete</button></div>
     `;
   })
   document.querySelector('.js-logs').innerHTML = expenseHTML;
+
+  saveExpenses();
+
+  document.querySelectorAll('.js-delete-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const expenseId = button.getAttribute('data-expense-id');
+      console.log(expenseId);
+      deleteExpense(expenseId);
+    })
+  })
 }
+
+function deleteExpense(id) {
+  expenseLog = expenseLog.filter(expense => expense.id !== id);
+  saveExpenses();
+  renderExpense();
+}
+
 
 function addExpense(event) {
   event.preventDefault();
@@ -48,6 +83,7 @@ function addExpense(event) {
   }
 
   expenseLog.push({
+    id: generateUniqueId(),
     category: category,
     priceCents: Math.round(price * 100),
     date: date
@@ -58,6 +94,8 @@ function addExpense(event) {
   saveExpenses();
   document.getElementById('expense-form').reset();
 }
+
+
 
 document.querySelector('.js-add-btn').addEventListener('click', addExpense);
 
