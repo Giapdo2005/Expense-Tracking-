@@ -73,6 +73,11 @@ label {
   margin-left: 20px;
   margin-top: 10px;
 }
+
+.budget-remaining {
+  margin-left: 20px;
+  margin-top: 30px;
+}
 .amount {
   padding: 4px;
 }

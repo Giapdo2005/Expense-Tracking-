@@ -59,6 +59,7 @@ function renderExpense() {
       deleteExpense(expenseId);
     })
   })
+  getRemainingBudget();
 }
 
 function deleteExpense(id) {
@@ -96,7 +97,7 @@ function addExpense(event) {
 
   renderExpense();
   saveExpenses();
-  document.getElementById('expense-form').reset();
+  
 }
 
 document.querySelector('.js-add-btn').addEventListener('click', addExpense);
@@ -119,10 +120,29 @@ document.querySelector('.js-set-budget-btn').addEventListener('click', displayBu
 function loadBudget() {
   const budget = localStorage.getItem('budget');
   if (budget) {
-    document.querySelector('.js-budget-display').innerText += ` $${budget}`;
+    document.querySelector('.js-budget-display').innerText = `Budget: $${budget}`;
   }
 }
 
-renderExpense();
+function getRemainingBudget() {
+  let budget = parseFloat(localStorage.getItem('budget'));
+
+  if(isNaN(budget)) {
+    alert('Budget is not set');
+    return;
+  }
+
+  let remainingBudget = budget;
+
+  expenseLog.forEach((expense) => {
+    remainingBudget -= expense.priceCents / 100;
+  })
+
+  console.log(remainingBudget);
+  document.querySelector('.js-budget-remaining').innerHTML = `Budget Remaining $${remainingBudget.toFixed(2)}`
+  localStorage.setItem('budget',budget);
+}
+
 loadBudget();
+renderExpense();
 
