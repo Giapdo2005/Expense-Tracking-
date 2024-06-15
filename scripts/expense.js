@@ -99,8 +99,30 @@ function addExpense(event) {
   document.getElementById('expense-form').reset();
 }
 
-
-
 document.querySelector('.js-add-btn').addEventListener('click', addExpense);
 
+function displayBudget() {
+  const inputBudget = document.querySelector('.js-budget');
+  const budget = inputBudget.value;
+
+  if (budget === '' || isNaN(budget) || budget <= 0) {
+    alert('Please enter a valid budget amount.');
+    return;
+  }
+
+  localStorage.setItem('budget', budget);
+  document.querySelector('.js-budget-display').innerText += ` $${budget}`;
+}
+
+document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
+
+function loadBudget() {
+  const budget = localStorage.getItem('budget');
+  if (budget) {
+    document.querySelector('.js-budget-display').innerText += ` $${budget}`;
+  }
+}
+
 renderExpense();
+loadBudget();
+

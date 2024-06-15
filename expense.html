@@ -17,21 +17,31 @@
   </div>
   <div class="flex-columns">
     <div class="user-input-header">
-      <label class="category-label" for="Category">Category:</label>
-      <select class="category-option js-category">
-        <option value="">Select a category</option>
-        <option value="Groceries">Groceries</option>
-        <option value="Bills">Bills</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Travel">Travel</option>
-        <option value="Others">Others</option>
-      </select>
-        <label  for="Amount">Amount:</label>
-        <input class="amount js-amount" type="text">
-        <label for="Date">Date:</label>
-        <input class="date-picker js-date" type="date" placeholder="mm / dd / yyyy">
-      </form>
-
+      <div>
+        <label class="category-label" for="Category">Category:</label>
+        <select class="category-option js-category">
+          <option value="">Select a category</option>
+          <option value="Groceries">Groceries</option>
+          <option value="Bills">Bills</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Travel">Travel</option>
+          <option value="Others">Others</option>
+        </select>
+          <label  for="Amount">Amount:</label>
+          <input class="amount js-amount" type="text">
+          <label for="Date">Date:</label>
+          <input class="date-picker js-date" type="date" placeholder="mm / dd / yyyy">
+      </div>
+      <div>
+        <form id="budget-form">
+          <label class="set-budget" for="budget">Set Budget:</label>
+          <input type="number" class="budget-input js-budget" placeholder="Budget amount">
+          <button class="budget-button js-set-budget-btn">Set Budget</button>
+        </form>
+        <div class="budget-display js-budget-display">
+          Your budget this month:
+        </div>
+      </div>
     </div>
     
     <div class="expense-submit">

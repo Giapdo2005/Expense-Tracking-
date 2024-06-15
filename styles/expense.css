@@ -18,6 +18,10 @@ div {
   padding-left: 20px;
   padding-right: 20px;
 }
+.user-input-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .user-input-header label {
   font-size: 20px;
 }
@@ -54,6 +58,21 @@ label {
   justify-content: center;
 }
 
+.set-budget {
+  margin-top: 10px;
+}
+
+.budget-input {
+  font-size: 18px;
+}
+.budget-button {
+  font-size: 18px;
+}
+
+.budget-display {
+  margin-left: 20px;
+  margin-top: 10px;
+}
 .amount {
   padding: 4px;
 }
@@ -66,17 +85,18 @@ input {
   margin-bottom: 10px;
 }
 .expense-submit {
-  justify-content: center;
   align-items: center;
   display: flex;
-  justify-content: center;
   margin-bottom: 20px;
   margin-top: 10px;
+  margin-left: 20px;
 }
 .expense-log {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .logs {
