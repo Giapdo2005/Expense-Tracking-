@@ -14,12 +14,12 @@ if (!expenseLog) {
     id: generateUniqueId(),
     category: 'Groceries',
     priceCents: 4399,
-    date: 'June 14th 2024'
+    date: '06/24/2024'
   }, {
     id: generateUniqueId(),
     category: 'golf',
     priceCents: 5634,
-    date: 'June 15th 2024'
+    date: '06/15/2024'
   }]
 } else {
   expenseLog = expenseLog.map(expense => {
@@ -70,12 +70,17 @@ function deleteExpense(id) {
 
 function addExpense(event) {
   event.preventDefault();
-  const inputCategory = document.querySelector('.js-description')
-  const category = inputCategory.value;
+  const inputCategory = document.querySelector('.js-category');
+  const category = inputCategory.value
+  console.log(category);
+
   const inputPrice = document.querySelector('.js-amount');
   const price = inputPrice.value;
+  console.log(price);
+
   const inputDate = document.querySelector('.js-date');
   const date = inputDate.value;
+  console.log(date);
 
   if (category === '' || isNaN(price) || date === '') {
     alert('Please fill in all fields correctly.');
@@ -89,7 +94,6 @@ function addExpense(event) {
     date: date
   })
 
-  
   renderExpense();
   saveExpenses();
   document.getElementById('expense-form').reset();
