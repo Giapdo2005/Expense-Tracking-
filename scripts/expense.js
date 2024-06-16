@@ -46,6 +46,7 @@ function renderExpense() {
       <div>$${(purchase.priceCents / 100).toFixed(2)}</div>
       <div>${purchase.date}</div>
       <div><button class="js-delete-button" data-expense-id="${purchase.id}">Delete</button></div>
+      <div><button class="js-edit-button" data-expense-id="${purchase.id}">Edit</button>
     `;
   })
   document.querySelector('.js-logs').innerHTML = expenseHTML;
@@ -59,7 +60,26 @@ function renderExpense() {
       deleteExpense(expenseId);
     })
   })
+  
+  document.querySelectorAll('.js-edit-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const expenseId = button.getAttribute('data-expense-id');
+      console.log(expenseId)
+      editExpense(expenseId);
+    })
+  });
+
   getRemainingBudget();
+}
+
+function editExpense(id) {
+  const expense = expenseLog.find(expense => expense.id === id);
+  if (expense) {
+    document.querySelector('.js-category').value = expense.category;
+    document.querySelector('.js-amount').value = (expense.priceCents / 100).toFixed(2);
+    document.querySelector('.js-date').value = expense.date;
+    deleteExpense(id); 
+  }
 }
 
 function deleteExpense(id) {
