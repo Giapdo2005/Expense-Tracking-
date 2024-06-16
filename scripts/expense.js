@@ -45,8 +45,8 @@ function renderExpense() {
       <div>${purchase.category}</div>
       <div>$${(purchase.priceCents / 100).toFixed(2)}</div>
       <div>${purchase.date}</div>
-      <div><button class="js-delete-button" data-expense-id="${purchase.id}">Delete</button></div>
-      <div><button class="js-edit-button" data-expense-id="${purchase.id}">Edit</button>
+      <div><button class="delete-btn js-delete-button" data-expense-id="${purchase.id}">Delete</button></div>
+      <div><button class="edit-btn js-edit-button" data-expense-id="${purchase.id}">Edit</button></div>
     `;
   })
   document.querySelector('.js-logs').innerHTML = expenseHTML;
@@ -135,7 +135,7 @@ function displayBudget() {
   document.querySelector('.js-budget-display').innerText += ` $${budget}`;
 }
 
-document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
+
 
 function loadBudget() {
   const budget = localStorage.getItem('budget');
@@ -163,6 +163,7 @@ function getRemainingBudget() {
   localStorage.setItem('budget',budget);
 }
 
+document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
+
 loadBudget();
 renderExpense();
-

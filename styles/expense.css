@@ -1,6 +1,9 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+
 }
 
 div {
@@ -11,7 +14,7 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: black;
+  background-color: rgb(21, 86, 250);
   color: white;
   height: 50px;
   align-items: center;
@@ -66,7 +69,16 @@ label {
   font-size: 18px;
 }
 .budget-button {
-  font-size: 18px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(21, 86, 250);
+  color: white;
+  border:none;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .budget-display {
@@ -96,6 +108,15 @@ input {
   margin-top: 10px;
   margin-left: 20px;
 }
+
+.add-btn {
+  background-color: rgb(21, 86, 250);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+}
 .expense-log {
   display: flex;
   justify-content: center;
@@ -107,7 +128,32 @@ input {
 .logs {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
   padding-left: 100px;
+  gap: 20px;
 }
 
+.logs div {
+  font-size: 17px;
+}
+
+.delete-btn {
+  background-color: rgb(173, 3, 3);
+  color: white;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.edit-btn {
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
