@@ -58,6 +58,7 @@ function renderExpense() {
       const expenseId = button.getAttribute('data-expense-id');
       console.log(expenseId);
       deleteExpense(expenseId);
+      updateCategorySpending();
     })
   })
   
@@ -66,6 +67,7 @@ function renderExpense() {
       const expenseId = button.getAttribute('data-expense-id');
       console.log(expenseId)
       editExpense(expenseId);
+      updateCategorySpending();
     })
   });
 
@@ -93,15 +95,12 @@ function addExpense(event) {
   event.preventDefault();
   const inputCategory = document.querySelector('.js-category');
   const category = inputCategory.value
-  console.log(category);
 
   const inputPrice = document.querySelector('.js-amount');
   const price = inputPrice.value;
-  console.log(price);
 
   const inputDate = document.querySelector('.js-date');
   const date = inputDate.value;
-  console.log(date);
 
   if (category === '' || isNaN(price) || date === '') {
     alert('Please fill in all fields correctly.');
@@ -117,7 +116,7 @@ function addExpense(event) {
 
   renderExpense();
   saveExpenses();
-  
+  updateCategorySpending();
 }
 
 document.querySelector('.js-add-btn').addEventListener('click', addExpense);
@@ -167,7 +166,30 @@ function getRemainingBudget() {
   }
 }
 
-document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
+
+
+function updateCategorySpending() {
+  
+  let categorySpending = {
+    Groceries: 0,
+    Bills: 0,
+    Entertainment: 0,
+    Travel: 0,
+    Others: 0
+  }
+  expenseLog.forEach((expense) => {
+   categorySpending[expense.category] += expense.priceCents / 100;
+  })
+
+  document.querySelector('.js-groceries-spending').innerText = `Groceries: $${categorySpending.Groceries.toFixed(2)}`
+  document.querySelector('.js-bills-spending').innerText = `Bills: $${categorySpending.Bills.toFixed(2)}`
+  document.querySelector('.js-entertainment-spending').innerText = `Entertainment: $${categorySpending.Entertainment.toFixed(2)}`
+  document.querySelector('.js-travel-spending').innerText = `Travel: $${categorySpending.Travel.toFixed(2)}`
+  document.querySelector('.js-others-spending').innerText = `Others: $${categorySpending.Others.toFixed(2)}`
+}
 
 loadBudget();
 renderExpense();
+updateCategorySpending();
+
+document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
