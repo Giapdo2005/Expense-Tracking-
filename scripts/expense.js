@@ -107,12 +107,19 @@ function addExpense(event) {
     return;
   }
 
-  expenseLog.unshift({
-    id: generateUniqueId(),
-    category: category,
-    priceCents: Math.round(price * 100),
-    date: date
-  })
+  if(getRemainingBudget() - price >= 0) {
+    expenseLog.unshift({
+      id: generateUniqueId(),
+      category: category,
+      priceCents: Math.round(price * 100),
+      date: date
+    })
+  } else {
+    alert('This will exceed your budget. Please add more funds!')
+    return;
+  }
+
+  
 
   renderExpense();
   saveExpenses();
@@ -162,8 +169,14 @@ function getRemainingBudget() {
   localStorage.setItem('budget',budget);
 
   if (remainingBudget < budget / 2) {
-    alert('You have used up half your budget this month');
+    alert('You have used up half your budget this month. Spend wisely!');
   }
+
+  if (remainingBudget <= 0) {
+    alert('You have used up all your budget this month. Please add more funds!')
+  }
+
+  return remainingBudget;
 }
 
 
