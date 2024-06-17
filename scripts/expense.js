@@ -161,6 +161,10 @@ function getRemainingBudget() {
   console.log(remainingBudget);
   document.querySelector('.js-budget-remaining').innerHTML = `Budget Remaining $${remainingBudget.toFixed(2)}`
   localStorage.setItem('budget',budget);
+
+  if (remainingBudget < budget / 2) {
+    alert('You have used up half your budget this month');
+  }
 }
 
 document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
