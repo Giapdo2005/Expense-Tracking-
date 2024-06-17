@@ -37,9 +37,6 @@ function saveExpenses() {
 }
 
 function renderExpense() {
-  expenseLog.reverse();
-
-  
   let expenseHTML = '';
 
   expenseLog.forEach((purchase) => {
@@ -111,7 +108,7 @@ function addExpense(event) {
     return;
   }
 
-  expenseLog.push({
+  expenseLog.unshift({
     id: generateUniqueId(),
     category: category,
     priceCents: Math.round(price * 100),
