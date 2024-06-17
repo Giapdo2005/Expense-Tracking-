@@ -37,6 +37,9 @@ function saveExpenses() {
 }
 
 function renderExpense() {
+  expenseLog.reverse();
+
+  
   let expenseHTML = '';
 
   expenseLog.forEach((purchase) => {
