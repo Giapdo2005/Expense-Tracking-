@@ -164,16 +164,19 @@ function getRemainingBudget() {
     remainingBudget -= expense.priceCents / 100;
   })
 
-  console.log(remainingBudget);
   document.querySelector('.js-budget-remaining').innerHTML = `Budget Remaining $${remainingBudget.toFixed(2)}`
   localStorage.setItem('budget',budget);
 
-  if (remainingBudget < budget / 2) {
+  const halfBudgetAlertShown = localStorage.getItem('halfBudgetAlertShown') === 'true';
+
+  if (!halfBudgetAlertShown && remainingBudget < budget / 2) {
     alert('You have used up half your budget this month. Spend wisely!');
+    localStorage.setItem('halfBudgetAlertShown', 'true');
   }
 
   if (remainingBudget <= 0) {
     alert('You have used up all your budget this month. Please add more funds!')
+    document.querySelector('.js-budget-display').innerText = `Budget: $0`;
   }
 
   return remainingBudget;
