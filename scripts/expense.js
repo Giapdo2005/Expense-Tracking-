@@ -31,11 +31,15 @@ if (!expenseLog) {
   saveExpenses();
 }
 
-let historyLog = JSON.parse(localStorage.getItem('historyLog')) || [];
 
+let historyLog = JSON.parse(localStorage.getItem('historyLog')) || [];
 
 function saveExpenses() {
   localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
+}
+
+function saveHistory() {
+  localStorage.setItem('historyLog', JSON.stringify(historyLog));
 }
 
 function renderExpense() {
@@ -88,6 +92,7 @@ function renderHistoryLog() {
     `;
   });
   document.querySelector('.js-history-logs').innerHTML = historyHTML;
+  saveHistory();
 }
 
 function editExpense(id) {
@@ -153,6 +158,7 @@ function displayBudget() {
 
   localStorage.setItem('budget', budget);
   document.querySelector('.js-budget-display').innerText += ` $${budget}`;
+  renderHistoryLog();
 }
 
 
@@ -178,8 +184,6 @@ function getRemainingBudget() {
     remainingBudget -= expense.priceCents / 100;
   })
 
-  document.querySelector('.js-budget-remaining').innerHTML = `Budget Remaining $${remainingBudget.toFixed(2)}`
-  localStorage.setItem('budget',budget);
 
   const halfBudgetAlertShown = localStorage.getItem('halfBudgetAlertShown') === 'true';
 
@@ -192,13 +196,14 @@ function getRemainingBudget() {
     alert('You have used up all your budget this month. Please add more funds!')
     document.querySelector('.js-budget-display').innerText = `Budget: $0`;
     expenseToHistory();
-    remainingBudget = 0;
+    localStorage.setItem('budget', 0);
   }
+
+  document.querySelector('.js-budget-remaining').innerHTML = `Budget Remaining $${remainingBudget.toFixed(2)}`
+  localStorage.setItem('budget',budget);
 
   return remainingBudget;
 }
-
-
 
 function updateCategorySpending() {
   
@@ -212,6 +217,10 @@ function updateCategorySpending() {
   expenseLog.forEach((expense) => {
    categorySpending[expense.category] += expense.priceCents / 100;
   })
+
+  historyLog.forEach((purchase) => {
+    categorySpending[purchase.category] += purchase.priceCents / 100;
+   })
 
   document.querySelector('.js-groceries-spending').innerText = `Groceries: $${categorySpending.Groceries.toFixed(2)}`
   document.querySelector('.js-bills-spending').innerText = `Bills: $${categorySpending.Bills.toFixed(2)}`
