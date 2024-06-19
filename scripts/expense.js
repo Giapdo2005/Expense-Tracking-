@@ -31,6 +31,8 @@ if (!expenseLog) {
   saveExpenses();
 }
 
+let historyLog = JSON.parse(localStorage.getItem('historyLog')) || [];
+
 
 function saveExpenses() {
   localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
@@ -72,6 +74,20 @@ function renderExpense() {
   });
 
   getRemainingBudget();
+}
+
+function renderHistoryLog() {
+  let historyHTML = ' ';
+
+  historyLog.forEach((purchase) => {
+    historyHTML += 
+    `
+      <div>${purchase.category}</div>
+      <div>${(purchase.priceCents / 100).toFixed(2)}</div>
+      <div>${purchase.date}</div>
+    `;
+  });
+  document.querySelector('.js-history-logs').innerHTML = historyHTML;
 }
 
 function editExpense(id) {
@@ -118,8 +134,6 @@ function addExpense(event) {
     alert('This will exceed your budget. Please add more funds!')
     return;
   }
-
-  
 
   renderExpense();
   saveExpenses();
@@ -177,6 +191,8 @@ function getRemainingBudget() {
   if (remainingBudget <= 0) {
     alert('You have used up all your budget this month. Please add more funds!')
     document.querySelector('.js-budget-display').innerText = `Budget: $0`;
+    expenseToHistory();
+    remainingBudget = 0;
   }
 
   return remainingBudget;
@@ -204,8 +220,17 @@ function updateCategorySpending() {
   document.querySelector('.js-others-spending').innerText = `Others: $${categorySpending.Others.toFixed(2)}`
 }
 
+function expenseToHistory() {
+  historyLog = historyLog.concat(expenseLog);
+  expenseLog = [];
+  saveExpenses();
+  renderExpense();
+  renderHistoryLog();
+}
+
 loadBudget();
 renderExpense();
 updateCategorySpending();
+renderHistoryLog();
 
 document.querySelector('.js-set-budget-btn').addEventListener('click', displayBudget);
