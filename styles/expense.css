@@ -173,15 +173,16 @@ input {
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 35px;
 }
 
 .history-logs {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
   gap: 20px;
-  padding-left: 240px;
+  padding-left: 270px;
 }
 

@@ -1,13 +1,21 @@
-let nextId = 1;
+import { generateUniqueId } from "./utils.js";
 
-function generateUniqueId() {
-  const timestamp = Date.now();
-  return `id-${timestamp}-${nextId++}`;
+function saveExpenses() {
+  localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
 }
 
+function saveHistory() {
+  localStorage.setItem('historyLog', JSON.stringify(historyLog));
+}
+
+function loadBudget() {
+  const budget = localStorage.getItem('budget');
+  if (budget) {
+    document.querySelector('.js-budget-display').innerText = `Budget: $${budget}`;
+  }
+}
 
 let expenseLog = JSON.parse(localStorage.getItem('expenseLog'));
-
 
 if (!expenseLog) {
   expenseLog = [{
@@ -31,16 +39,7 @@ if (!expenseLog) {
   saveExpenses();
 }
 
-
 let historyLog = JSON.parse(localStorage.getItem('historyLog')) || [];
-
-function saveExpenses() {
-  localStorage.setItem('expenseLog', JSON.stringify(expenseLog));
-}
-
-function saveHistory() {
-  localStorage.setItem('historyLog', JSON.stringify(historyLog));
-}
 
 function renderExpense() {
   let expenseHTML = '';
@@ -87,7 +86,7 @@ function renderHistoryLog() {
     historyHTML += 
     `
       <div>${purchase.category}</div>
-      <div>${(purchase.priceCents / 100).toFixed(2)}</div>
+      <div>$${(purchase.priceCents / 100).toFixed(2)}</div>
       <div>${purchase.date}</div>
     `;
   });
@@ -161,14 +160,6 @@ function displayBudget() {
   renderHistoryLog();
 }
 
-
-
-function loadBudget() {
-  const budget = localStorage.getItem('budget');
-  if (budget) {
-    document.querySelector('.js-budget-display').innerText = `Budget: $${budget}`;
-  }
-}
 
 function getRemainingBudget() {
   let budget = parseFloat(localStorage.getItem('budget'));
