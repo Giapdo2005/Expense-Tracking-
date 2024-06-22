@@ -69,5 +69,5 @@ export function addExpense(event, expenseLog) {
 
   renderExpense(expenseLog);
   saveExpenses(expenseLog);
-  updateCategorySpending(expenseLog, historyLog);
+  updateCategorySpending(expenseLog);
 }

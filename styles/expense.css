@@ -3,7 +3,6 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   background-color: #efdfdf;
-
 }
 
 div {
@@ -14,7 +13,7 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgb(21, 86, 250);
+  background-color: rgb(53, 107, 245);
   color: white;
   height: 50px;
   align-items: center;
@@ -74,7 +73,7 @@ label {
 .budget-button {
   font-size: 15px;
   font-weight: bold;
-  background-color: rgb(21, 86, 250);
+  background-color: rgb(53, 107, 245);
   color: white;
   border:none;
   border-radius: 15px;
@@ -92,6 +91,10 @@ label {
 .budget-remaining {
   margin-left: 20px;
   margin-top: 30px;
+}
+.total-spending {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .category-spending div {
@@ -118,7 +121,7 @@ input {
 }
 
 .add-btn {
-  background-color: rgb(21, 86, 250);
+  background-color: rgb(53, 107, 245);
   color: white;
   padding: 10px;
   margin-left: 70px;
@@ -184,5 +187,21 @@ input {
   margin-top: 20px;
   gap: 20px;
   padding-left: 270px;
+}
+
+.reset {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.reset-btn {
+  background-color:  rgb(53, 107, 245);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
 

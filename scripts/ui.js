@@ -1,4 +1,4 @@
-export function updateCategorySpending(expenseLog, historyLog) {
+export function updateCategorySpending(expenseLog) {
   let categorySpending = {
     Groceries: 0,
     Bills: 0,
@@ -11,9 +11,6 @@ export function updateCategorySpending(expenseLog, historyLog) {
     categorySpending[expense.category] += expense.priceCents / 100;
   });
 
-  historyLog.forEach((purchase) => {
-    categorySpending[purchase.category] += purchase.priceCents / 100;
-  });
 
   document.querySelector('.js-groceries-spending').innerText = `Groceries: $${categorySpending.Groceries.toFixed(2)}`;
   document.querySelector('.js-bills-spending').innerText = `Bills: $${categorySpending.Bills.toFixed(2)}`;
