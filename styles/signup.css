@@ -36,8 +36,7 @@ body {
   width: 250px;
   border-radius: 20px;
   border-style: solid;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 .container button {
   margin-top: 20px;
