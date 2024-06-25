@@ -18,7 +18,7 @@ export function updateCategorySpending(expenseLog) {
   document.querySelector('.js-others-spending').innerText = `Others: $${categorySpending.Others.toFixed(2)}`;
 }
 
-function resetTracker() {
+export function resetTracker() {
   localStorage.removeItem('expenseLog');
   localStorage.removeItem('historyLog');
   localStorage.removeItem('budget');

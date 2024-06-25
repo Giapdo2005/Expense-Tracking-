@@ -3,6 +3,14 @@ import { saveExpenses } from './localStorage.js';
 import { getRemainingBudget } from './budget.js';
 import { updateCategorySpending } from './ui.js';
 
+document.querySelector('.js-welcome').innerHTML += ``
+
+export function logOut() {
+  document.querySelector('.js-logout-btn').addEventListener('click', () => {
+    window.location.href = 'auth.html'
+  })
+}
+
 export function renderExpense(expenseLog) {
   let expenseHTML = '';
 
